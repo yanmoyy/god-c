@@ -1,68 +1,57 @@
-#include "calc.h"
 #include <stdio.h>
-#include <stdlib.h> /* for atof() */
-#define MAXOP 100 /* max size of operand or operator */
+#include <string.h>
 
-/* reverse polish calculator */
-int main(void)
+#define MAXLINES 500 /* max #lines to be sorted */
+
+char* lineptr[MAXLINES]; /* pointers to text lines */
+
+int readlines(char* lineptr[], int nlines);
+void writelines(char* lineptr[], int nlines);
+
+void qsort(char* lineptr[], int left, int right);
+
+/* sort input lines */
+int main()
 {
-    int type;
-    double op2;
-    char s[MAXOP];
+    int nlines; /* number of input lines read */
 
-    while ((type = getop(s)) != EOF) {
-        switch (type) {
-        case NUMBER:
-            push(atof(s));
-            break;
-        case '+':
-            push(pop() + pop());
-            break;
-        case '*':
-            push(pop() * pop());
-            break;
-        case '-':
-            op2 = pop();
-            push(pop() - op2);
-            break;
-        case '/':
-            op2 = pop();
-            if (op2 != 0.0)
-                push(pop() / op2);
-            else
-                printf("error: zero divisor\n");
-            break;
-        default:
-            printf("error: unknown command %s\n", s);
-            break;
+    if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+        qsort(lineptr, 0, nlines - 1);
+        writelines(lineptr, nlines);
+        return 0;
+    } else {
+        printf("error: input too big to sort\n");
+        return 1;
+    }
+}
+
+#define MAXLEN 1000 /* max length of any input line */
+int getLine(char*, int);
+char* alloc(int);
+
+/* readlines: read input lines */
+int readlines(char* lineptr[], int maxlines)
+{
+    int len, nlines;
+    char *p, line[MAXLEN];
+
+    nlines = 0;
+    while ((len = getLine(line, MAXLEN) > 0))
+        if (nlines >= maxlines || (p = alloc(len)) == NULL)
+            return -1;
+        else {
+            line[len - 1] = '\0'; /* delete newline */
+            strcpy(p, line);
+            lineptr[nlines++] = p;
         }
-    }
-
-    printf("result: %g\n", pop());
-    return 0;
+    return nlines;
 }
 
-#define MAXVAL 100 /* maximum depth of val stack */
-
-int sp = 0; /* next free stack position */
-double val[MAXVAL]; /* value stack */
-
-/* push: push f onto value stack */
-void push(double f)
+/* writelines: write output lines */
+void writelines(char* lineptr[], int nlines)
 {
-    if (sp < MAXVAL)
-        val[sp++] = f;
-    else
-        printf("error: stack full, can't push %g\n", f);
-}
+    int i;
 
-/* pop: pop and return top value from stack */
-double pop(void)
-{
-    if (sp > 0)
-        return val[--sp];
-    else {
-        printf("error: stack empty\n");
-        return 0.0;
-    }
+    for (i = 0; i < nlines; i++)
+        printf("%s\n", lineptr[i]);
 }
