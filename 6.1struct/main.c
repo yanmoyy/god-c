@@ -2,14 +2,14 @@
 #include <stdio.h>
 
 #define MAXWORD 100
-struct tnode* addtree(struct tnode*, char*);
-void treeprint(struct tnode*);
-int getword(char*, int);
+struct tnode *addtree(struct tnode *, char *);
+void treeprint(struct tnode *);
+int getword(char *, int);
 
 /* word frequency count */
 int main()
 {
-    struct tnode* root;
+    struct tnode *root;
     char word[MAXWORD];
 
     root = NULL;

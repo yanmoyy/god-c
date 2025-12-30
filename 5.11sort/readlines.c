@@ -2,10 +2,10 @@
 #include <string.h>
 #define MAXLEN 1000
 
-int getLine(char*, int);
-char* alloc(int);
+int getLine(char *, int);
+char *alloc(int);
 
-int readlines(char* lineptr[], int maxlines)
+int readlines(char *lineptr[], int maxlines)
 {
     int len, nlines;
     char *p, line[MAXLEN];
@@ -24,7 +24,7 @@ int readlines(char* lineptr[], int maxlines)
 }
 
 /* writelines: write output lines */
-void writelines(char* lineptr[], int nlines)
+void writelines(char *lineptr[], int nlines)
 {
     int i;
     for (i = 0; i < nlines; i++)

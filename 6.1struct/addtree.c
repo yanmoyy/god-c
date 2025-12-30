@@ -1,11 +1,11 @@
 #include "tnode.c"
 #include <string.h>
 
-struct tnode* talloc(void);
-char* strDup(char*);
+struct tnode *talloc(void);
+char *strDup(char *);
 
 /* addtree: add a node with w, at or below p */
-struct tnode* addtree(struct tnode* p, char* w)
+struct tnode *addtree(struct tnode *p, char *w)
 {
     int cond;
 

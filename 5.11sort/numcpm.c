@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 /* numcmp: compare s1 and s2 numerically */
-int numcmp(char* s1, char* s2)
+int numcmp(char *s1, char *s2)
 {
     double v1, v2;
 

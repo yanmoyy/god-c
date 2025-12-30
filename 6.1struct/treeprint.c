@@ -3,7 +3,7 @@
 #include <string.h>
 
 /* treeprint: in-order print of tree p */
-void treeprint(struct tnode* p)
+void treeprint(struct tnode *p)
 {
     if (p != NULL) {
         treeprint(p->left);

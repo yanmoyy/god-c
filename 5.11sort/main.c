@@ -2,18 +2,18 @@
 #include <string.h>
 
 #define MAXLINES 5000
-char* lineptr[MAXLINES];
+char *lineptr[MAXLINES];
 
-int readlines(char* lineptr[], int nlines);
-void writelines(char* lineptr[], int nlines);
+int readlines(char *lineptr[], int nlines);
+void writelines(char *lineptr[], int nlines);
 
-void qsort(void* lineptr[], int left, int right,
-    int (*comp)(void*, void*));
+void qsort(void *lineptr[], int left, int right,
+    int (*comp)(void *, void *));
 
-int numcmp(const char*, const char*);
+int numcmp(const char *, const char *);
 
 /* sort input lines */
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     int nlines; /* number of input lines read */
     int numeric = 0; /* 1 if numeric sort */
@@ -21,8 +21,8 @@ int main(int argc, char* argv[])
     if (argc > 1 && strcmp(argv[1], "-n") == 0)
         numeric = 1;
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-        qsort((void**)lineptr, 0, nlines - 1,
-            (int (*)(void*, void*))(numeric ? numcmp : strcmp));
+        qsort((void **)lineptr, 0, nlines - 1,
+            (int (*)(void *, void *))(numeric ? numcmp : strcmp));
 
         printf("\n=== sorted ===\n");
         printf("sorted %d lines\n", nlines);

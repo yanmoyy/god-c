@@ -36,7 +36,7 @@ int gettoken(void) /* return next token */
 {
     int c, getch(void);
     void ungetch(int);
-    char* p = token;
+    char *p = token;
 
     while ((c = getch()) == ' ' || c == '\t')
         ;

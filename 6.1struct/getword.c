@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 /* getword: get next word or character from input */
-int getword(char* word, int lim)
+int getword(char *word, int lim)
 {
     int c, getch(void);
     void ungetch(int);
-    char* w = word;
+    char *w = word;
 
     while (isspace(c = getch()))
         ;

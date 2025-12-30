@@ -1,10 +1,10 @@
 /* qsort: sort v[left]...v[right] into increasing order */
-void qsort(void* v[], int left, int right,
-    int (*comp)(void*, void*))
+void qsort(void *v[], int left, int right,
+    int (*comp)(void *, void *))
 {
     int i, last;
 
-    void swap(void* v[], int, int);
+    void swap(void *v[], int, int);
 
     if (left >= right) /* do nothing if array contains < 2 elems */
         return;

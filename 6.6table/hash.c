@@ -1,17 +1,17 @@
 #include <stdlib.h>
 #include <string.h>
 struct nlist { /* table entry */
-    struct nlist* next; /* next entry in chain */
-    char* name; /* defined name */
-    char* defn; /* replacement text */
+    struct nlist *next; /* next entry in chain */
+    char *name; /* defined name */
+    char *defn; /* replacement text */
 };
 
 #define HASHSIZE 101
 
-static struct nlist* hashtab[HASHSIZE]; /* pointer table */
+static struct nlist *hashtab[HASHSIZE]; /* pointer table */
 
 /* hash: form hash value for string s */
-unsigned hash(char* s)
+unsigned hash(char *s)
 {
     unsigned hashval;
 
@@ -20,9 +20,9 @@ unsigned hash(char* s)
     return hashval % HASHSIZE;
 }
 
-struct nlist* lookup(char* s)
+struct nlist *lookup(char *s)
 {
-    struct nlist* np;
+    struct nlist *np;
 
     for (np = hashtab[hash(s)]; np != NULL; np = np->next)
         if (strcmp(s, np->name) == 0)
@@ -30,23 +30,23 @@ struct nlist* lookup(char* s)
     return NULL; /* not found */
 }
 
-struct nlist* lookup(char*);
-char* strDup(char*);
+struct nlist *lookup(char *);
+char *strDup(char *);
 
 /* install: put (name, defn) in hashtab */
-struct nlist* install(char* name, char* defn)
+struct nlist *install(char *name, char *defn)
 {
-    struct nlist* np;
+    struct nlist *np;
     unsigned hashval;
 
     if ((np = lookup(name)) == NULL) { /* not found */
-        np = (struct nlist*)malloc(sizeof(*np));
+        np = (struct nlist *)malloc(sizeof(*np));
         if (np == NULL || (np->name = strDup(name)) == NULL)
             return NULL;
         hashval = hash(name);
         np->next = hashtab[hashval];
     } else /* already there */
-        free((void*)np->defn); /* free previous defn */
+        free((void *)np->defn); /* free previous defn */
     if ((np->defn = strDup(defn)) == NULL)
         return NULL;
     return np;

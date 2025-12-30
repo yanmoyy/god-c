@@ -1,1 +1,1 @@
-gcc *.c -o out && ./out -n && rm ./out
+cc *.c -o out && ./out && rm ./out

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /* minprintf: minimal printf with variable argument list */
-void minprintf(char* fmt, ...)
+void minprintf(char *fmt, ...)
 {
     va_list ap; /* points to each unnamed arg in turn */
     char *p, *sval;
@@ -25,7 +25,7 @@ void minprintf(char* fmt, ...)
             printf("%f", dval);
             break;
         case 's':
-            for (sval = va_arg(ap, char*); *sval; sval++)
+            for (sval = va_arg(ap, char *); *sval; sval++)
                 putchar(*sval);
             break;
         default:
