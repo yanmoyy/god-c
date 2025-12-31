@@ -36,9 +36,20 @@ void minprintf(char *fmt, ...)
     va_end(ap); /* clean up when doen */
 }
 
-int main()
+int getLine(char *s, int lim);
+
+int main() /* rudimentary calculator */
 {
-    minprintf("Hello, %s!\n", "world");
-    minprintf("The answer is %d.\n", 42);
-    minprintf("Pi is %f.\n", 3.1415926535897932);
+    int day, month, year;
+    char monthname[20];
+
+    char line[100];
+    while (getLine(line, sizeof(line)) > 0) {
+        if (sscanf(line, "%d %s %d", &day, monthname, &year) == 3)
+            printf("valid: %s\n", line);
+        else if (sscanf(line, "%d/%d/%d", &month, &day, &year) == 3)
+            printf("valid: %s\n", line);
+        else
+            printf("invalid: %s\n", line);
+    }
 }

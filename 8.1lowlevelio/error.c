@@ -9,7 +9,7 @@ void error(char *fmt, ...)
 
     va_start(args, fmt);
     fprintf(stderr, "error: ");
-    vprintf(stderr, args);
+    vprintf(fmt, args);
     fprintf(stderr, "\n");
     va_end(args);
     exit(1);

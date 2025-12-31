@@ -15,7 +15,7 @@ int numcmp(const char *, const char *);
 /* sort input lines */
 int main(int argc, char *argv[])
 {
-    int nlines; /* number of input lines read */
+    int nlines;      /* number of input lines read */
     int numeric = 0; /* 1 if numeric sort */
 
     if (argc > 1 && strcmp(argv[1], "-n") == 0)

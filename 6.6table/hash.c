@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
-struct nlist { /* table entry */
+struct nlist {          /* table entry */
     struct nlist *next; /* next entry in chain */
-    char *name; /* defined name */
-    char *defn; /* replacement text */
+    char *name;         /* defined name */
+    char *defn;         /* replacement text */
 };
 
 #define HASHSIZE 101
@@ -27,7 +27,7 @@ struct nlist *lookup(char *s)
     for (np = hashtab[hash(s)]; np != NULL; np = np->next)
         if (strcmp(s, np->name) == 0)
             return np; /* found */
-    return NULL; /* not found */
+    return NULL;       /* not found */
 }
 
 struct nlist *lookup(char *);
@@ -45,7 +45,7 @@ struct nlist *install(char *name, char *defn)
             return NULL;
         hashval = hash(name);
         np->next = hashtab[hashval];
-    } else /* already there */
+    } else                      /* already there */
         free((void *)np->defn); /* free previous defn */
     if ((np->defn = strDup(defn)) == NULL)
         return NULL;
