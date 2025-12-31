@@ -12,9 +12,9 @@ int readlines(char *lineptr[], int maxlines)
 
     nlines = 0;
     while ((len = getLine(line, MAXLEN)) > 0) {
-        if (nlines >= maxlines || (p = alloc(len)) == NULL)
+        if (nlines >= maxlines || (p = alloc(len)) == NULL) {
             return -1;
-        else {
+        } else {
             line[len - 1] = '\0'; /* delete newline */
             strcpy(p, line);
             lineptr[nlines++] = p;
@@ -27,6 +27,7 @@ int readlines(char *lineptr[], int maxlines)
 void writelines(char *lineptr[], int nlines)
 {
     int i;
-    for (i = 0; i < nlines; i++)
+    for (i = 0; i < nlines; i++) {
         printf("%s\n", lineptr[i]);
+    }
 }

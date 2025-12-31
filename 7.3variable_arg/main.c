@@ -25,8 +25,9 @@ void minprintf(char *fmt, ...)
             printf("%f", dval);
             break;
         case 's':
-            for (sval = va_arg(ap, char *); *sval; sval++)
+            for (sval = va_arg(ap, char *); *sval; sval++) {
                 putchar(*sval);
+            }
             break;
         default:
             putchar(*p);
@@ -45,11 +46,12 @@ int main() /* rudimentary calculator */
 
     char line[100];
     while (getLine(line, sizeof(line)) > 0) {
-        if (sscanf(line, "%d %s %d", &day, monthname, &year) == 3)
+        if (sscanf(line, "%d %s %d", &day, monthname, &year) == 3) {
             printf("valid: %s\n", line);
-        else if (sscanf(line, "%d/%d/%d", &month, &day, &year) == 3)
+        } else if (sscanf(line, "%d/%d/%d", &month, &day, &year) == 3) {
             printf("valid: %s\n", line);
-        else
+        } else {
             printf("invalid: %s\n", line);
+        }
     }
 }

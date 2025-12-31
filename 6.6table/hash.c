@@ -15,8 +15,9 @@ unsigned hash(char *s)
 {
     unsigned hashval;
 
-    for (hashval = 0; *s != '\0'; s++)
+    for (hashval = 0; *s != '\0'; s++) {
         hashval = *s + 31 * hashval;
+    }
     return hashval % HASHSIZE;
 }
 
@@ -24,10 +25,12 @@ struct nlist *lookup(char *s)
 {
     struct nlist *np;
 
-    for (np = hashtab[hash(s)]; np != NULL; np = np->next)
-        if (strcmp(s, np->name) == 0)
+    for (np = hashtab[hash(s)]; np != NULL; np = np->next) {
+        if (strcmp(s, np->name) == 0) {
             return np; /* found */
-    return NULL;       /* not found */
+        }
+    }
+    return NULL; /* not found */
 }
 
 struct nlist *lookup(char *);
@@ -41,13 +44,16 @@ struct nlist *install(char *name, char *defn)
 
     if ((np = lookup(name)) == NULL) { /* not found */
         np = (struct nlist *)malloc(sizeof(*np));
-        if (np == NULL || (np->name = strDup(name)) == NULL)
+        if (np == NULL || (np->name = strDup(name)) == NULL) {
             return NULL;
+        }
         hashval = hash(name);
         np->next = hashtab[hashval];
-    } else                      /* already there */
+    } else {                    /* already there */
         free((void *)np->defn); /* free previous defn */
-    if ((np->defn = strDup(defn)) == NULL)
+    }
+    if ((np->defn = strDup(defn)) == NULL) {
         return NULL;
+    }
     return np;
 }
