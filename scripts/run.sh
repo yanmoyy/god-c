@@ -1,1 +1,1 @@
-gcc *.c -o out && ./out fsize.c && rm ./out
+gcc *.c -o out && ./out && rm ./out
